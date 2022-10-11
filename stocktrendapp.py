@@ -18,7 +18,7 @@ from tensorflow.keras.models import load_model
 start = '2012-07-01'
 end = '2022-08-01'
 
-st.title('Stock Trend Prediction App')
+st.title('Stock Trend Prediction App using Stacked LSTM')
 
 user_input = st.text_input('Enter Ticker Symbol: ','AAPL')
 df = web.DataReader(user_input,'yahoo',start,end)
@@ -98,7 +98,7 @@ y_predicted = y_predicted*scale_factor
 y_test = y_test*scale_factor
 
 #Step11 Final Graph
-st.subheader('Predictions vs Original')
+st.subheader('Original Price vs Predicted Price through Stacked LSTM')
 fig2 = plt.figure(figsize=(12,6))
 plt.plot(y_test, color='black', label=f"Original {user_input} price")
 plt.plot(y_predicted, color= 'red', label=f"predicted {user_input} price")
