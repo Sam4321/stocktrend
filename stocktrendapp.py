@@ -12,10 +12,11 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, LSTM
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
+from tensorflow.keras.models import load_model
 
 #Step2 Loading the Data
-start = '2010-07-01'
-end = '2022-07-01'
+start = '2012-07-01'
+end = '2022-08-01'
 
 st.title('Stock Trend Prediction App')
 
@@ -59,18 +60,19 @@ scaler = MinMaxScaler(feature_range=(0,1))
 data_training_array = scaler.fit_transform(data_training)
 
 #Step7 Splitting data into x_train and y_train
-x_train = []
-y_train = []
+#x_train = []
+#y_train = []
 
-for i in range(100, data_training_array.shape[0]):
-    x_train.append(data_training_array[i-100:i])
-    y_train.append(data_training_array[i, 0])
+#for i in range(100, data_training_array.shape[0]):
+#    x_train.append(data_training_array[i-100:i])
+#    y_train.append(data_training_array[i, 0])
     
-x_train, y_train = np.array(x_train), np.array(y_train)
+#x_train, y_train = np.array(x_train), np.array(y_train)
 
 #Step8 Load my model
+#from keras import models
 from keras import models
-model = load_model('keras_model.h5')
+model = models.load_model('keras_model_dal.h5')
 
 #Step9 Testing Part
 past_100_days = data_training.tail(100)
@@ -88,9 +90,9 @@ x_test, y_test = np.array(x_test), np.array(y_test)
 
 #Step10 Making Predictions
 y_predicted = model.predict(x_test)
-scaler.scale_
+scaler = scaler.scale_
 
-scale_factor = 1/0.00716063
+scale_factor = 1/scaler[0]
 y_predicted = y_predicted*scale_factor
 
 y_test = y_test*scale_factor
