@@ -71,8 +71,8 @@ data_training_array = scaler.fit_transform(data_training)
 
 #Step8 Load my model
 #from keras import models
-from keras import models
-model = models.load_model('keras_model_dal.h5')
+from tensorflow.keras.models import load_model
+model = load_model('keras_model_dal.h5')
 
 #Step9 Testing Part
 past_100_days = data_training.tail(100)
@@ -100,10 +100,10 @@ y_test = y_test*scale_factor
 #Step11 Final Graph
 st.subheader('Predictions vs Original')
 fig2 = plt.figure(figsize=(12,6))
-plt.plot(y_test, color='black', label=f"Original {company} price")
-plt.plot(y_predicted, color= 'red', label=f"predicted {company} price")
-plt.title(f"{company} share price")
+plt.plot(y_test, color='black', label=f"Original {user_input} price")
+plt.plot(y_predicted, color= 'red', label=f"predicted {user_input} price")
+plt.title(f"{user_input} share price")
 plt.xlabel("time")
-plt.ylabel(f"{company} share price")
+plt.ylabel(f"{user_input} share price")
 plt.legend()
 st.pyplot(fig2)
